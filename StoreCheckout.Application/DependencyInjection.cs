@@ -25,30 +25,13 @@ namespace StoreCheckout.Application
 
             services.AddAutoMapper(typeof(MappingProfile));
 
-            services.AddScoped<GreenTeaDiscountStrategy>();
-            services.AddScoped<StrawberriesDiscountStrategy>();
-            services.AddScoped<CoffeeDiscountStrategy>();
-            services.AddScoped<ProductWithoutDiscountStrategy>();
-
-            services.AddStrategyContext();
+            services.AddScoped<IStrategy, GreenTeaDiscountStrategy>();
+            services.AddScoped<IStrategy, StrawberriesDiscountStrategy>();
+            services.AddScoped<IStrategy, CoffeeDiscountStrategy>();
+            services.AddScoped<IStrategy, ProductWithoutDiscountStrategy>();
+            services.AddScoped<IStrategyContext, StrategyContext>();
 
             return services;
-        }
-
-        private static IServiceCollection AddStrategyContext(this IServiceCollection services)
-        {
-            return services.AddScoped<IStrategyContext, StrategyContext>(provider =>
-            {
-                Dictionary<string, IStrategy> strategies = new()
-                {
-                    { ProductsCode.GreenTea, provider.GetRequiredService<GreenTeaDiscountStrategy>() },
-                    { ProductsCode.Strawberries, provider.GetRequiredService<StrawberriesDiscountStrategy>() },
-                    { ProductsCode.Coffee, provider.GetRequiredService<CoffeeDiscountStrategy>() },
-                    { string.Empty, provider.GetRequiredService<ProductWithoutDiscountStrategy>() },
-                };
-
-                return new StrategyContext(strategies);
-            });
         }
     }
 }

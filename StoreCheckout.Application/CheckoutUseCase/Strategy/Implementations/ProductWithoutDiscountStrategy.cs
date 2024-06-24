@@ -1,4 +1,5 @@
-﻿using StoreCheckout.Application.CheckoutUseCase.Strategy.Contrats;
+﻿using StoreCheckout.Application.CheckoutUseCase.Configurations;
+using StoreCheckout.Application.CheckoutUseCase.Strategy.Contrats;
 using StoreCheckout.Domain.Entities;
 
 namespace StoreCheckout.Application.CheckoutUseCase.Strategy.Implementations
@@ -9,7 +10,7 @@ namespace StoreCheckout.Application.CheckoutUseCase.Strategy.Implementations
     internal sealed class ProductWithoutDiscountStrategy : IStrategy
     {
         /// <inheritdoc/>
-        public string ProductCode => string.Empty;
+        public string ProductCode => ProductsCode.Default;
 
         /// <summary>
         /// Executes the strategy to calculate the total price of products without applying discounts.

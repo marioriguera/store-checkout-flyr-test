@@ -1,4 +1,6 @@
-﻿using StoreCheckout.Application.CheckoutUseCase.Strategy.Contrats;
+﻿using StoreCheckout.Application.CheckoutUseCase.Configurations;
+using StoreCheckout.Application.CheckoutUseCase.Strategy.Contrats;
+using StoreCheckout.Application.CheckoutUseCase.Strategy.Implementations;
 using StoreCheckout.Domain.Entities;
 
 namespace StoreCheckout.Application.CheckoutUseCase.Strategy
@@ -8,28 +10,26 @@ namespace StoreCheckout.Application.CheckoutUseCase.Strategy
     /// </summary>
     internal sealed class StrategyContext : IStrategyContext
     {
-        private readonly Dictionary<string, IStrategy> _strategies;
+        private readonly IEnumerable<IStrategy> _strategies;
         private IStrategy? _strategy;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="StrategyContext"/> class with the provided strategies.
         /// </summary>
-        /// <param name="strategies">The dictionary of strategies where the key is the strategy identifier and the value is the strategy implementation.</param>
-        public StrategyContext(Dictionary<string, IStrategy> strategies)
+        /// <param name="strategies">The collection of strategies implementations.</param>
+        public StrategyContext(IEnumerable<IStrategy> strategies)
         {
-            _strategies = strategies;
+            _strategies = strategies ?? new List<IStrategy>()
+            {
+                new ProductWithoutDiscountStrategy(),
+            };
         }
 
         /// <inheritdoc/>
         public void SetStrategy(string key)
         {
-            if (_strategies.TryGetValue(key, out IStrategy? strategy))
-            {
-                _strategy = strategy;
-                return;
-            }
-
-            _strategy = _strategies[string.Empty];
+            _strategy = _strategies.Where(s => s.ProductCode.Equals(key)).FirstOrDefault()
+                        ?? _strategies.Where(s => s.ProductCode.Equals(ProductsCode.Default)).First();
         }
 
         /// <inheritdoc/>
