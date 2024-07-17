@@ -10,7 +10,7 @@ namespace StoreCheckout.Application.CheckoutUseCase.Strategy.Contrats
         /// <summary>
         /// Sets the strategy to be executed.
         /// </summary>
-        /// <param name="key">The key strategy to set the strategy.</param>
+        /// <param name="key">The key product to set the strategy.</param>
         void SetStrategy(string key);
 
         /// <summary>

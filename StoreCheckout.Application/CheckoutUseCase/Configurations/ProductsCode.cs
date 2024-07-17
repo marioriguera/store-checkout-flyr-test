@@ -31,9 +31,8 @@
         public const string Beer = "BR1";
 
         /// <summary>
-        /// The product code for the stategy without discount.
-        /// It is for <see cref="StoreCheckout.Application.CheckoutUseCase.Strategy.Implementations.ProductWithoutDiscountStrategy"/> strategy.
+        /// The product code for pop corn.
         /// </summary>
-        public const string Default = "DEFAULT";
+        public const string PopCorn = "PC1";
     }
 }

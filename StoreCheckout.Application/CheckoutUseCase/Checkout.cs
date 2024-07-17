@@ -60,7 +60,8 @@ namespace StoreCheckout.Application.CheckoutUseCase
         {
             decimal total = 0;
 
-            Dictionary<string, List<Product>> productsGroupByCode = _products.GroupBy(p => p.Code).ToDictionary(g => g.Key, g => g.ToList());
+            Dictionary<string, List<Product>> productsGroupByCode = _products.GroupBy(p => p.Code)
+                                                                                .ToDictionary(g => g.Key, g => g.ToList());
 
             foreach (var item in productsGroupByCode)
             {

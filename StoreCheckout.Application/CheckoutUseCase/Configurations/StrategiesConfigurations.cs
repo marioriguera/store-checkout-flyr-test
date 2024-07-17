@@ -61,9 +61,10 @@ namespace StoreCheckout.Application.CheckoutUseCase.Configurations
     }
 
     /// <summary>
-    /// Represent products discount rules configurations.
+    /// Represents the configuration for product discount rules.
     /// </summary>
-    /// <param name="Amount">Amount products value rule.</param>
-    /// <param name="Discount">Discount products value rule.</param>
-    public record ProductDiscountRuleConfiguration(int? Amount, decimal? Discount);
+    /// <param name="Amount">The amount of products required to apply the discount.</param>
+    /// <param name="Discount">The discount value to be applied.</param>
+    /// <param name="Products">The collection of product codes to which the discount applies.</param>
+    public record ProductDiscountRuleConfiguration(int? Amount, decimal? Discount, IEnumerable<string>? Products);
 }

@@ -25,9 +25,9 @@ namespace StoreCheckout.Application
 
             services.AddAutoMapper(typeof(MappingProfile));
 
-            services.AddScoped<IStrategy, GreenTeaDiscountStrategy>();
-            services.AddScoped<IStrategy, StrawberriesDiscountStrategy>();
-            services.AddScoped<IStrategy, CoffeeDiscountStrategy>();
+            services.AddScoped<IStrategy, CEODiscountStrategy>();
+            services.AddScoped<IStrategy, COODiscountStrategy>();
+            services.AddScoped<IStrategy, CTODiscountStrategy>();
             services.AddScoped<IStrategy, ProductWithoutDiscountStrategy>();
             services.AddScoped<IStrategyContext, StrategyContext>();
 

@@ -28,14 +28,18 @@ namespace StoreCheckout.Application.CheckoutUseCase.Strategy
         /// <inheritdoc/>
         public void SetStrategy(string key)
         {
-            _strategy = _strategies.Where(s => s.ProductCode.Equals(key)).FirstOrDefault()
-                        ?? _strategies.Where(s => s.ProductCode.Equals(ProductsCode.Default)).First();
+            _strategy = _strategies.Where(s => s.DiscountCode.Equals(GetStrategyCodeByProductKey(key))).First();
         }
 
         /// <inheritdoc/>
         public decimal ExecuteStrategy(List<Product> products)
         {
             return _strategy?.Execute(products) ?? 0;
+        }
+
+        private string GetStrategyCodeByProductKey(string key)
+        {
+            return _strategies.Where(s => s.ProductsCode!.Contains(key)).FirstOrDefault()?.DiscountCode ?? DiscountCodes.Default;
         }
     }
 }

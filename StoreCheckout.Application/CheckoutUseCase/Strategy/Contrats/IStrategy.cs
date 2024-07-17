@@ -3,20 +3,25 @@
 namespace StoreCheckout.Application.CheckoutUseCase.Strategy.Contrats
 {
     /// <summary>
-    /// Defines a strategy interface for executing operations on a list of products.
+    /// Represents a strategy for applying discounts to products.
     /// </summary>
     public interface IStrategy
     {
         /// <summary>
-        /// Gets product code implemented by the strategy.
+        /// Gets the discount code associated with the strategy.
         /// </summary>
-        string ProductCode { get; }
+        string DiscountCode { get; }
 
         /// <summary>
-        /// Executes a specific operation on the provided list of products.
+        /// Gets the collection of product codes that the strategy applies to.
         /// </summary>
-        /// <param name="products">The list of products on which to execute the strategy.</param>
-        /// <returns>The result of the operation as a decimal value.</returns>
+        IEnumerable<string>? ProductsCode { get; }
+
+        /// <summary>
+        /// Executes the strategy on a list of products and returns the total discount.
+        /// </summary>
+        /// <param name="products">The list of products to apply the strategy to.</param>
+        /// <returns>The total discount amount.</returns>
         decimal Execute(List<Product> products);
     }
 }

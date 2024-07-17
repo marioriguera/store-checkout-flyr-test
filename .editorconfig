@@ -83,6 +83,7 @@ dotnet_diagnostic.CS8603.severity = silent
 dotnet_diagnostic.SA1000.severity = none
 dotnet_diagnostic.SA1124.severity = none
 dotnet_diagnostic.SA0001.severity = none
+dotnet_diagnostic.SA1310.severity = none
 
 [*.vb]
 #### Estilos de nomenclatura ####

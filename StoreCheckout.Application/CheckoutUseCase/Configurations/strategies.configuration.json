@@ -1,13 +1,17 @@
 {
-  "GR1": {
-    "amount": 2
+  "CEO": {
+    "amount": 2,
+    "discount": 0.5,
+    "products": [ "GR1" ]
   },
-  "SR1": {
+  "COO": {
     "amount": 3,
-    "discount": "4,50"
+    "discount": 4.50,
+    "products": [ "SR1" ]
   },
-  "CF1": {
+  "CTO": {
     "amount": 3,
-    "discount": "0,6666666666666666666666666667"
+    "discount": 0.6666666666666666666666666667,
+    "products": [ "CF1" ]
   }
 }

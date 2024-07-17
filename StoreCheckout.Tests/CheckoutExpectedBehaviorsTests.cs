@@ -220,6 +220,33 @@ namespace StoreCheckout.Tests
         }
 
         /// <summary>
+        /// Buys five coffees and five pop corns, expects a quantity discount to apply.
+        /// </summary>
+        [Fact]
+        public void Buy_Five_Coffees_And_Five_Pop_Corn()
+        {
+            ProductDTO coffee = new(ProductsCode.Coffee, "Coffee", 10.00m);
+            ProductDTO popCorn = new(ProductsCode.PopCorn, "Pop Corn", 10.00m);
+
+            Checkout checkout = _serviceProvider.GetService<Checkout>()
+                ?? throw new Exception($"Failed to resolve {nameof(Checkout)} dependency.");
+
+            checkout.Scan(coffee);
+            checkout.Scan(coffee);
+            checkout.Scan(coffee);
+            checkout.Scan(coffee);
+            checkout.Scan(coffee);
+
+            checkout.Scan(popCorn);
+            checkout.Scan(popCorn);
+            checkout.Scan(popCorn);
+            checkout.Scan(popCorn);
+            checkout.Scan(popCorn);
+
+            Assert.Equal(50.00m, checkout.Total());
+        }
+
+        /// <summary>
         /// Buys six coffees and expects a quantity discount to apply.
         /// </summary>
         [Fact]
